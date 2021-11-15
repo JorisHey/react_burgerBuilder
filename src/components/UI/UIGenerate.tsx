@@ -1,24 +1,35 @@
-import { Bacon, Cheese, Meat, Salad } from '../../dataStructure';
+import { Ingredient } from '../../dataStructure';
 import styles from './UI.module.css';
 
+function* generateId() {
+  let id = 0;
+  while (true) yield id++;
+}
+
+const keyId = generateId();
+
 export function generateUI(
-  ingredient: Salad | Cheese | Bacon | Meat,
+  ingredient: Ingredient,
   index: number,
-  changeIngredients: (index: number, newValue: Salad | Cheese | Bacon | Meat) => void
+  changeIngredients: (index: number, newValue: Ingredient) => void
 ) {
-  for (const [key, value] of Object.entries(ingredient)) {
-    return (
-      <div draggable="true" key={index} className={`${styles.box} ${styles[key]}`}>
-        <input
-          type="number"
-          min="1"
-          max="9"
-          defaultValue={value}
-          onChange={(e) =>
-            changeIngredients(index, { [key]: Number(e.target.value) } as unknown as Salad | Cheese | Bacon | Meat)
-          }
-        />
-      </div>
-    );
-  }
+  return (
+    <div
+      draggable="true"
+      key={`_UI_${ingredient.type}${keyId.next().value}`}
+      className={`${styles.box} ${styles[ingredient.type]}`}
+    >
+      <input
+        type="number"
+        min="1"
+        max="9"
+        value={ingredient.count}
+        onChange={(e) => changeIngredients(index, { type: ingredient.type, count: Number(e.target.value) })}
+      />
+      <span className={styles.drag}>
+        <hr />
+        <hr />
+      </span>
+    </div>
+  );
 }

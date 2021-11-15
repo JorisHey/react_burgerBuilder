@@ -1,9 +1,9 @@
-import { Ingredients } from '../../dataStructure';
+import { Ingredient } from '../../dataStructure';
 import styles from './Burger.module.css';
 import { generateIngredients } from './BurgerGenerate';
 
 type ChildProps = {
-  ingredients: Ingredients;
+  ingredients: Ingredient[];
 };
 
 export default function Burger({ ingredients }: ChildProps) {

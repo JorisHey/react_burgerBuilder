@@ -1,10 +1,10 @@
 import styles from './UI.module.css';
-import { Ingredients, Salad, Meat, Cheese, Bacon } from '../../dataStructure';
+import { Ingredient } from '../../dataStructure';
 import { generateUI } from './UIGenerate';
 
 type ChildProps = {
-  ingredients: Ingredients;
-  changeIngredients: (index: number, newValue: Salad | Cheese | Bacon | Meat) => void;
+  ingredients: Ingredient[];
+  changeIngredients: (index: number, newValue: Ingredient) => void;
 };
 
 export default function UI({ ingredients, changeIngredients }: ChildProps) {

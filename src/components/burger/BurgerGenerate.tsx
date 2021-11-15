@@ -1,4 +1,4 @@
-import { Bacon, Cheese, Meat, Salad, Ingredients } from '../../dataStructure';
+import { Ingredient } from '../../dataStructure';
 import styles from './Burger.module.css';
 
 function* generateId() {
@@ -8,27 +8,17 @@ function* generateId() {
 
 const keyId = generateId();
 
-function generateIngredient(ingredient: Salad | Cheese | Bacon | Meat) {
-  for (const [ingredientName, value] of Object.entries(ingredient)) {
-    const values = [];
-    for (var i = 0; i < value; i++) {
-      values.push(i);
-    }
-
-    if (ingredientName) {
-      return (
-        <>
-          {values.map(() => (
-            <div key={'_' + ingredientName + keyId.next().value} className={styles[ingredientName]}></div>
-          ))}
-        </>
-      );
-    }
-  }
-  return <></>;
+function generateIngredient(ingredient: Ingredient) {
+  return (
+    <>
+      {new Array(ingredient.count).fill(null).map(() => (
+        <div key={`_BURGER_${ingredient.type}${keyId.next().value}`} className={styles[ingredient.type]}></div>
+      ))}
+    </>
+  );
 }
 
-export function generateIngredients(ingredients: Ingredients) {
+export function generateIngredients(ingredients: Ingredient[]) {
   const elements: JSX.Element[] = [];
 
   ingredients.forEach((ingredient) => {
