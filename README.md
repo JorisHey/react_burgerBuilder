@@ -1,5 +1,7 @@
 # Burger Builder
 
+![alt text](./public/hamburger.png?raw=true 'Hamburger')
+
 ## React Typescript project
 
 My first full React Typescript project
