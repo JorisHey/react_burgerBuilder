@@ -1,30 +1,27 @@
 import { Ingredient } from '../../dataStructure';
 import styles from './UI.module.css';
 
-function* generateId() {
-  let id = 0;
-  while (true) yield id++;
-}
-
-const keyId = generateId();
-
 export function generateUI(
   ingredient: Ingredient,
   index: number,
-  changeIngredients: (index: number, newValue: Ingredient) => void
-) {
+  changeIngredients: (i: number, newValue: Ingredient) => void
+): JSX.Element {
   return (
-    <div
-      draggable="true"
-      key={`_UI_${ingredient.type}${keyId.next().value}`}
-      className={`${styles.box} ${styles[ingredient.type]}`}
-    >
+    <div className={`${styles.box} ${styles[ingredient.type]}`}>
       <input
         type="number"
         min="1"
-        max="9"
+        max="4"
         value={ingredient.count}
-        onChange={(e) => changeIngredients(index, { type: ingredient.type, count: Number(e.target.value) })}
+        onKeyDown={() => false}
+        onChange={(e) => {
+          if (Number(e.target.value) > 4) return false;
+          changeIngredients(index, {
+            id: ingredient.id,
+            type: ingredient.type,
+            count: Number(e.target.value),
+          });
+        }}
       />
       <span className={styles.drag}>
         <hr />

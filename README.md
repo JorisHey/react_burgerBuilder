@@ -7,19 +7,18 @@ My first full React Typescript project
 - React
 - Typescript
 - CSS Module
+- Drag & Drop (react-beautiful-dnd)
 
 ---
 
 ### Features to add
 
 - Add extra ingredients
-- Drag and drop
 
 ---
 
 ### BUGS (to solve)
 
-- User can manually add extra ingredients
 - UI is not going down (overflow with burger)
 - Please contact me if you've found extra bugs
 
